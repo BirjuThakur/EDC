@@ -78,6 +78,12 @@ const applicationSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    no_of_team_members:{
+      type:Number
+    },
+    adhar_number:{
+      type:Number
+    },
     names_of_team_members:{
         type:String,
         required:true
