@@ -10,6 +10,8 @@ require("../db/connection");
 const Register = require("../modals/register");
 //require authnatification
 const auth = require("../autontification/auth");
+//require applicatnts 
+const Appicatnts = require("../modals/stage1");
 
 //for storing data in mongodb
 router.use(express.json());
@@ -27,6 +29,18 @@ router.get("/stage1",auth, (req,res) =>{
     console.log(req.user)
     res.send(req.user)
 })
+
+router.post("/stage1",async(req,res) =>{
+try {
+    const newApplication = new Appicatnts(req.body);
+    console.log(newApplication)
+    await newApplication.save();
+    res.status(201).json({ success: true, data: newApplication });
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: error.message });
+}
+});
 
 //registration 
 router.get("/register",async(req,res) =>{
